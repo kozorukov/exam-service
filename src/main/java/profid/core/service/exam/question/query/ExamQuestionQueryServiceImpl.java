@@ -3,6 +3,7 @@ package profid.core.service.exam.question.query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import profid.core.exception.EntityNotFoundException;
 import profid.core.service.EntityConverter;
 import profid.core.service.exam.question.ExamQuestionDto;
 import profid.core.service.exam.question.ExamQuestionEntity;
@@ -22,6 +23,6 @@ public class ExamQuestionQueryServiceImpl implements ExamQuestionQueryService {
     public ExamQuestionDto get(UUID id) {
         return examQuestionRepository.findExamQuestionEntityById(id)
                 .map(examQuestionConverter::convert)
-                .orElseThrow(() -> new RuntimeException("!!!"));
+                .orElseThrow(() -> new EntityNotFoundException("Вопрос не найден"));
     }
 }

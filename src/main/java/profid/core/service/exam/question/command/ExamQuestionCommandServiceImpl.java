@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import profid.core.exception.EntityNotFoundException;
 import profid.core.service.exam.answer.ExamAnswerRepository;
 import profid.core.service.exam.question.ExamQuestionDto;
 import profid.core.service.exam.question.ExamQuestionEntity;
@@ -34,7 +35,7 @@ public class ExamQuestionCommandServiceImpl implements ExamQuestionCommandServic
     @Override
     public void update(@Valid ExamQuestionDto examQuestion) {
         var examQuestionEntity = examQuestionRepository.findById(examQuestion.getId())
-                .orElseThrow(() -> new RuntimeException("!!!"));
+                .orElseThrow(() -> new EntityNotFoundException("Вопрос не найден"));
         examQuestionEntity.setQuestionText(examQuestion.getText());
     }
 }
