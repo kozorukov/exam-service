@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  jpa:
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5433/profid
+    username: profid
+    password: 12345678
+  data:
+    jdbc:
+      dialect: postgresql
+other-service:
+  url: "http://localhost:8080/api"

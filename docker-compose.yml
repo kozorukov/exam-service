@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: profid
+      POSTGRES_USER: profid
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  profid:
+    build:
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 127.0.0.1:8080:8080
+volumes:
+  postgres:
