@@ -29,14 +29,8 @@ public class ExamQueryServiceImpl implements ExamQueryService {
 
     @Override
     public Page<ExamDto> getAll(Pageable pageable) {
-        var examQuestions = examQuestionRepository.findAll(pageable);
-        return new PageImpl<>(
-                examQuestions.stream()
-                        .map(this::createResultDto)
-                        .toList(),
-                pageable,
-                examQuestions.getTotalElements()
-        );
+        return examQuestionRepository.findAll(pageable)
+                .map(this::createResultDto);
     }
 
     private ExamDto createResultDto(ExamQuestionEntity examQuestion) {
